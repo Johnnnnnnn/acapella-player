@@ -7,16 +7,22 @@ module.exports = {
     filename: '[name].bundle.js',
   },
   module: {
-    rules: [{
-      test: /\.jsx?$/, // 用正则来匹配文件路径，这段意思是匹配 js 或者 jsx
-      loader: 'babel-loader', // 加载模块 "babel" 是 "babel-loader" 的缩写
-      query: {
-        presets: ["react"],
-        cacheDirectory: true
+    rules: [
+      {
+        test: /\.jsx?$/, // 用正则来匹配文件路径，这段意思是匹配 js 或者 jsx
+        loader: 'babel-loader', // 加载模块 "babel" 是 "babel-loader" 的缩写
+        query: {
+          presets: ["react"],
+          cacheDirectory: true
+        },
+        enforce: 'pre', // updated value
+        exclude: /node_modules/
       },
-      enforce: 'pre', // updated value
-      exclude: /node_modules/
-    }]
+      {
+        test: /\.css$/, // Only .css files
+        loader: 'style-loader!css-loader' // Run both loaders
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({

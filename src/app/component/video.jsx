@@ -1,12 +1,15 @@
 import React from 'react';
 
+// Enum
+import { PlayerReadyState } from '../enum/player-ready-state.js';
+
 // Interface
 import { 
 	MediaPlayer,
 	loadMedia
 } from '../interface/media-player.interface.js'
 
-export default class Voce extends MediaPlayer {
+export default class Video extends MediaPlayer {
 
 	constructor(props) {
 
@@ -18,8 +21,6 @@ export default class Voce extends MediaPlayer {
 
   	render() {
 
-  		const title = this.props
-
 	    return <div>
 
 	    	<input 
@@ -28,25 +29,30 @@ export default class Voce extends MediaPlayer {
 	    		checked={!this.state.muted}
 	    	/>
 
-	    	<label>{this.props.title}</label>
-
 	    	<input
-	    		disabled={this.state.disableFileInput}
 	    		onChange={this[loadMedia]}
-	    		accept=".mp3"	
+	    		disabled={this.state.disableFileInput}
+	    		accept=".mp4"	
 	    		type="file" 
 	    	/>
 
-	    	<audio 
+	    	<video 
 	    		muted={this.state.muted ? 'muted' : ''}
-	    		ref={ (audio) => {
-	    			this.player = audio
+	    		ref={ (video) => {
+	    			this.player = video
 	    		}}
 	    		src={this.state.src}
-	    	></audio>
-	    	
+	    		style={
+	    			{
+	    				backgroundColor: 'black',
+	    				width: '100%'
+	    			}
+	    		}
+	    	></video>
+	    		
 	    </div>;
 
   	}
+
 
 }
